@@ -9,7 +9,6 @@ First, install [Yeoman](http://yeoman.io) and generator-bg-starter-cordova using
 npm install -g yo
 npm install -g generator-bg-starter-cordova
 ```
-
 Then generate your new project:
 
 ```bash
