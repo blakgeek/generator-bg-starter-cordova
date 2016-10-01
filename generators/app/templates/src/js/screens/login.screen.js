@@ -8,18 +8,11 @@
 			restrict: 'E',
 			scope: true,
 			templateUrl: 'templates/screens/login.html',
-			controller: [
-				'$scope',
-				'$element',
-				'$rootScope',
-				'$timeout',
-				'$http',
-				'Account',
-				controller
-			]
+            controller: controller,
+            controllerAs: 'screen'
 		};
 
-		function controller($scope, $element, $rootScope, $timeout, $http, Account) {
+		function controller($element, $timeout) {
 
 			var SCREEN_NAME = 'login';
 			var element = $element [0];

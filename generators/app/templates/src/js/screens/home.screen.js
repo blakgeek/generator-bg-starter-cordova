@@ -8,18 +8,11 @@
 			restrict: 'E',
 			scope: true,
 			templateUrl: 'templates/screens/home.html',
-			controller: [
-				'$scope',
-				'$element',
-				'$rootScope',
-				'$timeout',
-				'$http',
-				'Account',
-				controller
-			]
+			controller: controller,
+            controllerAs: 'screen'
 		};
 
-		function controller($scope, $element, $rootScope, $timeout, $http, Account) {
+		function controller($scope, $element, $timeout) {
 
 			var SCREEN_NAME = 'home';
 			var element = $element [0];
