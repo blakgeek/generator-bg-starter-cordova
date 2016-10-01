@@ -1,0 +1,17 @@
+{
+    "name": "<%= _.slugify(_.humanize(appname)) %>",
+    "version": "<%= version %>",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "^1",
+        "lodash": "^4",
+        "fastclick": "^1"
+    }
+}
+

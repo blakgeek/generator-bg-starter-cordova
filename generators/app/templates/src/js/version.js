@@ -1,0 +1,4 @@
+window.version = {
+
+    v: "<%= version %>"
+};

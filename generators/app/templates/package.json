@@ -1,0 +1,29 @@
+{
+  "name": "<%= _.slugify(_.humanize(appname)) %>",
+  "version": "<%= version %>",
+  "devDependencies": {
+      "cca": "^0.7.1",
+      "cordova": "^6",
+      "grunt": "<1",
+      "grunt-bump": "^0.8.0",
+      "grunt-bower-concat": "^0.5.0",
+      "grunt-concurrent": "^2.0.0",
+      "grunt-contrib-clean": "^0.6.0",
+      "grunt-contrib-compress": "^0.13.0",
+      "grunt-contrib-concat": "^0.5.1",
+      "grunt-contrib-connect": "^0.10.1",
+      "grunt-contrib-copy": "^0.8.0",
+      "grunt-contrib-cssmin": "^0.12.3",
+      "grunt-contrib-sass": "^0.9.2",
+      "grunt-contrib-uglify": "^0.9.1",
+      "grunt-contrib-watch": "^0.6.1",
+      "grunt-cordovacli": "^0.8.2",
+      "grunt-express": "^1.4.1",
+      "grunt-filerev": "^2.3.1",
+      "grunt-open": "^0.2.3",
+      "grunt-usemin": "^3.0.0",
+      "grunt-wiredep": "^2.0.0",
+      "load-grunt-tasks": "^3.2.0",
+      "libxmljs": "^0.18.0"
+  }
+}
