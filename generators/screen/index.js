@@ -65,7 +65,7 @@ module.exports = Base.extend({
 
             data = fs.readFileSync(indexHtml, 'utf8');
             result = data
-                .replace(/([ \t]*)(<!-- add:screen directives -->)/g, '$1$2\n$1<' + directive + '></' + directive + '>')
+                .replace(/([ \t]*)(<!-- add:screen directives -->)/g, '$1$2\n$1<' + directive + 'class="screen"></' + directive + '>')
                 .replace(/([ \t]*)(<!-- add:screens js -->)/g, '$1$2\n$1<script src="js/screens/' + this.screen + '.screen.js"></script>');
             fs.writeFileSync(indexHtml, result, 'utf8');
 
