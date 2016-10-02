@@ -24,6 +24,7 @@
       "grunt-usemin": "^3.0.0",
       "grunt-wiredep": "^2.0.0",
       "load-grunt-tasks": "^3.2.0",
-      "libxmljs": "^0.18.0"
+      "libxmljs": "^0.18.0",
+      "grunt-parallel": "^0.5.1"
   }
 }

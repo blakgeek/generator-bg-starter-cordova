@@ -21,7 +21,7 @@ module.exports = function (grunt) {
                 logConcurrentOutput: true
             },
             watchMobile: {
-                tasks: ['cordovacli:runBrowser', 'watch:mobileAll', 'watch:mobileSass']
+                tasks: ['cordovacli:run', 'watch:mobileAll', 'watch:mobileSass']
             }
         },
         watch: {
@@ -64,10 +64,10 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd: 'src',
                         src: ['**', '!sass/**'],
-                        dest: '<%%= config.dest %>'
+                        dest: '<%= config.dest %>'
                     }, {
-                        src: 'config/<%%= config.env %>.js',
-                        dest: '<%%= config.dest %>/js/config.js'
+                        src: 'config/<%= config.env %>.js',
+                        dest: '<%= config.dest %>/js/config.js'
                     }
                 ]
             },
@@ -142,10 +142,17 @@ module.exports = function (grunt) {
                     command: 'prepare'
                 }
             },
-            runBrowser: {
+            runOnDevice: {
                 options: {
                     command: 'run',
-                    platforms: ['browser']
+                    platforms: ['<%= config.platform %>'],
+                    args: ['--device']
+                }
+            },
+            run: {
+                options: {
+                    command: 'run',
+                    platforms: ['<%= config.platform %>']
                 }
             }
         },
@@ -172,10 +179,27 @@ module.exports = function (grunt) {
         'cordovacli:prepare'
     ]);
 
-    grunt.registerTask('serve', [
-        'prepare',
-        'concurrent:watchMobile'
-    ]);
+    grunt.registerTask('run', function(platform) {
+
+        var tasks = ['prepare'];
+        config.platform = platform || 'browser';
+        if(grunt.option('device')) {
+            tasks.push('cordovacli:runOnDevice');
+        } else {
+            tasks.push('cordovacli:run');
+        }
+
+        grunt.task.run(tasks);
+    });
+
+    grunt.registerTask('serve', function(platform) {
+
+        config.platform = platform || 'browser';
+        grunt.task.run([
+            'prepare',
+            'concurrent:watchMobile'
+        ]);
+    });
 
     grunt.registerTask('dist', [
         'release',
