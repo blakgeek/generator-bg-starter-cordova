@@ -1,6 +1,6 @@
 {
   "name": "generator-bgmo",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "A Yeoman generator to jumpstart my Cordova development",
   "homepage": "",
   "author": {
