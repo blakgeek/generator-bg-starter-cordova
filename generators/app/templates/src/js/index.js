@@ -4,6 +4,7 @@ document.addEventListener('deviceready', function() {
 
     if(cordova.plugins && cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.disableScroll(true);
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
         // This event fires when the keyboard will be shown
 
         window.addEventListener('native.keyboardshow', function keyboardShowHandler(e) {

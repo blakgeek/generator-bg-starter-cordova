@@ -1,5 +1,5 @@
 {
-  "name": "generator-bg-starter-cordova",
+  "name": "generator-bgmo",
   "version": "0.1.1",
   "description": "A Yeoman generator to jumpstart my Cordova development",
   "homepage": "",
@@ -20,8 +20,10 @@
   ],
   "dependencies": {
     "chalk": "^1.0.0",
+    "cordova-lib": "^6.3.1",
     "gulp": "^3.9.1",
     "libxmljs": "^0.18.0",
+    "lodash": "^4.16.2",
     "minimatch": "^3.0.3",
     "yeoman-generator": "^0.23.3",
     "yosay": "^1.0.2"

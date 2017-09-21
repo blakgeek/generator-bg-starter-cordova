@@ -1,0 +1,13 @@
+<div class="popup popup-notification" ng-class="popups.notification.type">
+    <header class="popup-header" ng-if="popups.notification.title">
+        <h1>{{popups.notification.title}}</h1>
+    </header>
+    <main class="popup-content" ng-bind-html="popups.notification.content"></main>
+    <footer class="popup-footer">
+        <div ng-repeat="button in popups.notification.actions"
+             ng-class="{'popup-button-negative': button.negative, 'popup-button-positive': button.positive}"
+             class="popup-button" ng-click="button.action(); popups.close()">
+            {{button.text}}
+        </div>
+    </footer>
+</div>

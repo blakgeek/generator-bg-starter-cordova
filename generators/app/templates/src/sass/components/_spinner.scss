@@ -1,0 +1,64 @@
+spinner {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 250ms 100ms, visibility 0s 350ms;
+
+    .keyboard-open & {
+        display: none;
+    }
+
+    &.open {
+        transition: opacity 250ms;
+        opacity: 1;
+        visibility: inherit;
+    }
+
+    .spinner-content {
+        padding: 40px;
+    }
+
+    .spinner {
+        width: 150px;
+        height: 150px;
+        max-width: 300px;
+        max-height: 300px;
+    }
+
+    .spinner-circle {
+        fill: none;
+        stroke-width: 40;
+        stroke-linecap: round;
+
+        &-inner {
+            stroke: #ddd;
+        }
+
+        &-outer {
+            stroke: white;
+            stroke-dasharray: 145.2 1016.6;
+            animation: spinner-rotate 1s infinite linear;
+            transform-origin: 50% 50%;
+        }
+    }
+}
+
+@keyframes spinner-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

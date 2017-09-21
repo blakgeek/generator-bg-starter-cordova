@@ -2,24 +2,25 @@
 
     'use strict';
 
-    window.<%= module %>.directive('<%= screen %>', function() {
+    window.<%= module %>.directive('<%= slideup %>', function() {
 
         return {
             restrict: 'E',
             scope: true,
-            templateUrl: 'templates/screens/<%= screen %>.html',
+            templateUrl: 'templates/slideups/<%= slideup %>.html',
             controller: controller,
-            controllerAs: 'screen'
+            controllerAs: 'slideup'
         };
 
         function controller($element, $timeout) {
 
             var self = this;
             var element = $element[0];
-            var SCREEN_NAME = '<%= screen %>';
+            var SLIDEUP_ID = '<%= slideup %>';
             var active = false;
 
-            if(history.state && history.state.screen === SCREEN_NAME) {
+
+            if(history.state && history.state.slideup === SLIDEUP_ID) {
 
                 activate(history.state);
             }
@@ -28,9 +29,9 @@
 
                 var state = history.state;
 
-                if(state && state.screen) {
+                if(state && state.slideup) {
 
-                    if(state.screen === SCREEN_NAME) {
+                    if(state.slideup === SLIDEUP_ID) {
                         activate(state);
                     } else if(active) {
                         active = false;

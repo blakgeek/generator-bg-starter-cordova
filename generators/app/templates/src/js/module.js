@@ -6,7 +6,13 @@
 
         'use strict';
 
-        window.<%= module %> = angular.module('<%= module %>', []).factory('authInterceptor', [
+        window.bgComps = angular.module('bg-comps', []);
+        window.<%= module %> = angular.module('<%= module %>', ['bg-comps']).constant('Config', _.defaults(window.config, {
+            // add you default configuration values here
+        })).constant('BuildInfo', _.defaults(window.buildInfo, {
+            version: '0.0.0',
+            sha: 'unknown'
+        })).factory('authInterceptor', [
             '$rootScope', function($rootScope) {
 
                 return {
@@ -36,7 +42,7 @@
 
                 if(!history.state || !history.state.screen) {
 
-                    history.pushState({
+                    history.replaceState({
                         screen: 'home'
                     });
                 }
@@ -44,6 +50,16 @@
                 $rootScope.goBack = function() {
                     history.back();
                 };
+
+                document.addEventListener("backbutton", function () {
+
+                    if (history.state && history.state.$r < 0) {
+                        history.back();
+                    } else {
+                        navigator.Backbutton.goHome();
+                    }
+                    return true;
+                }, false);
 
                 $rootScope.logout = function() {
 

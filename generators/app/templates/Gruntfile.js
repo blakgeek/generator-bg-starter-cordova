@@ -21,7 +21,7 @@ module.exports = function (grunt) {
                 logConcurrentOutput: true
             },
             watchMobile: {
-                tasks: ['cordovacli:run', 'watch:mobileAll', 'watch:mobileSass']
+                tasks: ['cordovacli:runBrowser', 'watch:mobileAll', 'watch:mobileSass']
             }
         },
         watch: {
@@ -34,7 +34,7 @@ module.exports = function (grunt) {
                 tasks: ['copy:src', 'wiredep', 'cordovacli:prepare']
             },
             mobileSass: {
-                files: 'src/sass/**/*.scss',
+                files: ['src/sass/**/*.scss', 'merges_src/**/*.scss'],
                 tasks: ['sass', 'cordovacli:prepare']
             }
         },
@@ -47,6 +47,12 @@ module.exports = function (grunt) {
                         src: '**/*.scss',
                         ext: '.css',
                         dest: 'www/css'
+                    }, {
+                        expand: true,
+                        cwd: 'merges_src',
+                        src: '**/*.scss',
+                        ext: '.css',
+                        dest: 'merges'
                     }
                 ]
             }
@@ -63,13 +69,26 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: 'src',
-                        src: ['**', '!sass/**'],
-                        dest: '<%= config.dest %>'
+                        src: ['**', '!sass/**', '!js/buildInfo.js'],
+                        dest: '<%%= config.dest %>'
                     }, {
-                        src: 'config/<%= config.env %>.js',
-                        dest: '<%= config.dest %>/js/config.js'
+                        src: 'config/<%%= config.env %>.js',
+                        dest: '<%%= config.dest %>/js/config.js'
                     }
                 ]
+            },
+            buildInfo: {
+
+                src: 'src/js/buildInfo.js',
+                dest: '<%%= config.dest %>/js/buildInfo.js',
+                options: {
+                    process: function (content) {
+
+                        return content.replace(/<version>/, grunt.config.get('pkg.version') || '')
+                            .replace(/<sha>/, grunt.config.get('gitinfo.local.branch.current.shortSHA') || '')
+                            .replace(/"<timestamp>"/, Date.now());
+                    }
+                }
             },
             configXml: {
                 src: 'config.xml',
@@ -142,17 +161,23 @@ module.exports = function (grunt) {
                     command: 'prepare'
                 }
             },
+            runBrowser: {
+                options: {
+                    command: 'run',
+                    platforms: ['browser']
+                }
+            },
             runOnDevice: {
                 options: {
                     command: 'run',
-                    platforms: ['<%= config.platform %>'],
+                    platforms: ['<%%= config.platform %>'],
                     args: ['--device']
                 }
             },
             run: {
                 options: {
                     command: 'run',
-                    platforms: ['<%= config.platform %>']
+                    platforms: ['<%%= config.platform %>']
                 }
             }
         },
@@ -171,13 +196,19 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('prepare', [
-        'clean',
-        'copy:src',
-        'sass',
-        'wiredep',
-        'cordovacli:prepare'
-    ]);
+    grunt.registerTask('prepare', function(env) {
+
+        config.env = env || 'dev';
+        grunt.task.run([
+            'clean',
+            'gitinfo',
+            'copy:src',
+            'copy:buildInfo',
+            'sass',
+            'wiredep',
+            'cordovacli:prepare'
+        ])
+    });
 
     grunt.registerTask('run', function(platform) {
 

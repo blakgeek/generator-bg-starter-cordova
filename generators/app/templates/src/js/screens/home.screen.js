@@ -20,14 +20,6 @@
 
 			element.classList.add('screen');
 
-            $scope.play = function(type) {
-
-                var screen = type + 'player';
-                history.pushState({
-                    screen: screen
-                });
-            };
-
 			if(history.state && history.state.screen === SCREEN_NAME) {
 
 				activate(history.state);

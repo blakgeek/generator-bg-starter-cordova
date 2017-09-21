@@ -1,0 +1,202 @@
+popups {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    visibility: hidden;
+    z-index: -1;
+    background-color: transparent;
+    transition: z-index 0s 100ms, visibility 0s 100ms, background-color 100ms;
+
+    &.active {
+        background-color: rgba(black, .95);
+        visibility: visible;
+        z-index: 10000;
+        transition: background-color 150ms;
+    }
+
+    .popup {
+
+        background-color: white;
+        transform: translate3d(0, 100px, 0);
+        opacity: 0;
+        transition: opacity 150ms, transform 250ms;
+        border-radius: 5px;
+        max-width: calc(100% - 30px);
+        overflow: hidden;
+
+        &.positive {
+            .popup-button,
+            .popup-header {
+                background-color: green;
+                color: white;
+            }
+        }
+
+        &.warning {
+            .popup-button,
+            .popup-header {
+                background-color: gold;
+                color: white;
+            }
+        }
+
+        &.info {
+            .popup-button,
+            .popup-header {
+                background-color: cornflowerblue;
+                color: white;
+            }
+        }
+
+        &.error {
+            .popup-button,
+            .popup-header {
+                background-color: orangered;
+                color: white;
+            }
+        }
+
+        &.open {
+            transform: none;
+            opacity: 1;
+        }
+
+        &-header {
+            padding: 20px;
+            text-align: center;
+            line-height: normal;
+
+            h1 {
+                margin: 0;
+            }
+        }
+
+        &-content {
+            padding: 20px 20px 15px;
+            line-height: normal;
+            text-align: center;
+        }
+
+        &-footer {
+            padding: 5px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &-button {
+            width: 200px;
+            max-width: calc(100% - 30px);
+            border-radius: 50px;
+            background-color: black;
+            color: white;
+            height: 44px;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &-negative {
+                color: black !important;
+                background-color: transparent !important;
+            }
+        }
+    }
+}
+
+@mixin popups {
+
+    .popups {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        visibility: hidden;
+        z-index: -1;
+        background-color: transparent;
+        transition: z-index 0s 100ms, visibility 0s 100ms, background-color 100ms;
+
+        .keyboard-open & {
+            display: none !important;
+        }
+
+        &.active {
+            background-color: rgba(black, .95);
+            visibility: visible;
+            z-index: 10000;
+            transition: background-color 150ms;
+        }
+
+        .popup {
+
+            background-color: white;
+            transform: translate3d(0, 100px, 0);
+            opacity: 0;
+            transition: opacity 150ms, transform 250ms;
+            border-radius: 5px;
+            max-width: calc(100% - 30px);
+            overflow: hidden;
+
+            &.open {
+                transform: none;
+                opacity: 1;
+            }
+
+            &-header {
+                padding: 20px;
+                text-align: center;
+                line-height: normal;
+
+                h1 {
+                    margin: 0;
+                    font-weight: 600;
+                }
+            }
+
+            &-content {
+                padding: 20px 20px 15px;
+                line-height: normal;
+                text-align: center;
+            }
+
+            &-footer {
+                padding: 5px 5px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            &-button {
+                width: 200px;
+                max-width: calc(100% - 30px);
+                border-radius: 50px;
+                background-color: black;
+                color: white;
+                height: 44px;
+                margin: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &-negative {
+                    color: black !important;
+                    background-color: transparent !important;
+                }
+            }
+        }
+    }
+}

@@ -4,7 +4,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var _ = require('lodash');
 var _s = require('underscore.string');
-var cordova = require('cordova');
+var cordova = require('cordova-lib').cordova;
 
 module.exports = Base.extend({
 
@@ -64,11 +64,34 @@ module.exports = Base.extend({
                         value: 'settings'
                     }
                 ]
+            }, {
+                type: 'checkbox',
+                name: 'fonts',
+                message: 'Which fonts do you want to include?',
+                choices: [
+                    {
+                        name: 'Ionicons',
+                        value: 'ionicons/ionicons'
+                    },
+                    {
+                        name: 'Typicons',
+                        value: 'typicons'
+                    },
+                    {
+                        name: 'Open Sans',
+                        value: 'opensans'
+                    },
+                    {
+                        name: 'Nunito',
+                        value: 'nunito'
+                    }
+                ]
             }
         ]).then(function (props) {
 
             var screens = {};
             this.screens = props.screens;
+            props.fonts = ['arrows'].concat(props.fonts);
             props.screens.forEach(function (screen) {
 
                 screens[screen] = true;
@@ -91,10 +114,16 @@ module.exports = Base.extend({
 
         cordova: function () {
 
-            var done = this.async();
             var name = _.capitalize(_.camelCase(this.name));
-            cordova.create('.', this.id, name, done);
 
+            cordova.create('.', this.id, name, {
+                lib: {
+                    www: {
+                        template: true,
+                        url: this.templatePath('../cordova_app')
+                    }
+                }
+            }, this.async());
         },
 
         copy: function () {

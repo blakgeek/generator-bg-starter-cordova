@@ -58,12 +58,12 @@ module.exports = Base.extend({
 
             var indexHtml = this.destinationPath('src/index.html');
             var screensSass = this.destinationPath('src/sass/screens/_screens.scss');
-            var tagName = _.kebabCase(this.screen);
+            var directive = _.kebabCase(this.screen);
             var data, result;
 
             data = fs.readFileSync(indexHtml, 'utf8');
             result = data
-                .replace(/([ \t]*)(<!-- add:screen directives -->)/g, '$1$2\n$1<' + tagName + ' class="screen"></' + tagName + '>')
+                .replace(/([ \t]*)(<!-- add:screen directives -->)/g, '$1$2\n$1<' + directive + ' class="screen"></' + directive + '>')
                 .replace(/([ \t]*)(<!-- add:screens js -->)/g, '$1$2\n$1<script src="js/screens/' + this.screen + '.screen.js"></script>');
             fs.writeFileSync(indexHtml, result, 'utf8');
 
